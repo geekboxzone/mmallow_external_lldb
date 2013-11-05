@@ -28,6 +28,13 @@ m_summary_sp(),
 m_synthetic_sp()
 {}
 
+FormatCache::Entry::Entry (const Entry& rhs) :
+m_summary_cached(rhs.m_summary_cached),
+m_synthetic_cached(rhs.m_synthetic_cached),
+m_summary_sp(rhs.m_summary_sp),
+m_synthetic_sp(rhs.m_synthetic_sp)
+{}
+
 FormatCache::Entry::Entry (lldb::TypeSummaryImplSP summary_sp) :
 m_synthetic_cached(false),
 m_synthetic_sp()
@@ -46,6 +53,18 @@ FormatCache::Entry::Entry (lldb::TypeSummaryImplSP summary_sp,lldb::SyntheticChi
 {
     SetSummary (summary_sp);
     SetSynthetic (synthetic_sp);
+}
+
+FormatCache::Entry& FormatCache::Entry::operator= (const Entry& rhs)
+{
+    if (this == &rhs)
+        return *this;
+
+    m_summary_cached = rhs.m_summary_cached;
+    m_synthetic_cached = rhs.m_synthetic_cached;
+    m_summary_sp = rhs.m_summary_sp;
+    m_synthetic_sp = rhs.m_synthetic_sp;
+    return *this;
 }
 
 bool

@@ -34,9 +34,12 @@ private:
         lldb::SyntheticChildrenSP m_synthetic_sp;
     public:
         Entry ();
+        Entry (const Entry& rhs);
         Entry (lldb::TypeSummaryImplSP);
         Entry (lldb::SyntheticChildrenSP);
         Entry (lldb::TypeSummaryImplSP,lldb::SyntheticChildrenSP);
+
+        Entry& operator= (const Entry& rhs);
 
         bool
         IsSummaryCached ();

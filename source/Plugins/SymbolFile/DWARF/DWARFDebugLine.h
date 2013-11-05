@@ -110,6 +110,35 @@ public:
         typedef collection::const_iterator  const_iterator;
 
         Row(bool default_is_stmt = false);
+        Row(const Row& rhs) :
+            address(rhs.address),
+            line(rhs.line),
+            column(rhs.column),
+            file(rhs.file),
+            is_stmt(rhs.is_stmt),
+            basic_block(rhs.basic_block),
+            end_sequence(rhs.end_sequence),
+            prologue_end(rhs.prologue_end),
+            epilogue_begin(rhs.epilogue_begin),
+            isa(rhs.isa)
+        {}
+        Row& operator =(const Row& rhs)
+        {
+            if (&rhs == this)
+                return *this;
+
+            address = rhs.address;
+            line = rhs.line;
+            column = rhs.column;
+            file = rhs.file;
+            is_stmt = rhs.is_stmt;
+            basic_block = rhs.basic_block;
+            end_sequence = rhs.end_sequence;
+            prologue_end = rhs.prologue_end;
+            epilogue_begin = rhs.epilogue_begin;
+            isa = rhs.isa;
+            return *this;
+        }
         virtual ~Row() {}
         void PostAppend ();
         void Reset(bool default_is_stmt);
